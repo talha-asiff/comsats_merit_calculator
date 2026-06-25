@@ -7,6 +7,9 @@ COMSATS University admission merit aggregate calculator app made with flutter
 --> Predict Admission possibilities in CS/SE/AI programs
 --> Predict Campus admisiions
 
+# WEB VERSION
+[![Website](https://img.shields.io/badge/View_Live-Click_Here-blue?style=for-the-badge&logo=google-chrome)](https://comsats-merit-calculator.netlify.app/)
+
 # NOTE
 The prediction status in this app isn't very accurate. It just predict your admission possibility accordinh to the previous years closing merits
 
