@@ -35,7 +35,7 @@ class _MainAppState extends State<MainApp> {
               decoration: InputDecoration(
                 label: Text("Total SSC Marks"),
                 fillColor:
-                    Colors.grey[850], // Slightly lighter than the background
+                    Colors.grey[850], 
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -64,7 +64,7 @@ class _MainAppState extends State<MainApp> {
               decoration: InputDecoration(
                 label: Text("Obtained SSC Marks"),
                 fillColor:
-                    Colors.grey[850], // Slightly lighter than the background
+                    Colors.grey[850], 
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -90,7 +90,7 @@ class _MainAppState extends State<MainApp> {
               decoration: InputDecoration(
                 label: Text("Total HSSC Marks"),
                 fillColor:
-                    Colors.grey[850], // Slightly lighter than the background
+                    Colors.grey[850], 
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -119,7 +119,7 @@ class _MainAppState extends State<MainApp> {
               decoration: InputDecoration(
                 label: Text("Obtained HSSC Marks"),
                 fillColor:
-                    Colors.grey[850], // Slightly lighter than the background
+                    Colors.grey[850], 
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -145,7 +145,7 @@ class _MainAppState extends State<MainApp> {
               decoration: InputDecoration(
                 label: Text("NTS Marks out of 100"),
                 fillColor:
-                    Colors.grey[850], // Slightly lighter than the background
+                    Colors.grey[850], 
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
