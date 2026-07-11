@@ -245,9 +245,11 @@ class GPACalc extends StatefulWidget {
 }
 
 class _GPACalcState extends State<GPACalc> {
-  int courses = 1;
+  int courses = 0;
   bool nocourse = true;
-
+  int ch = 0;
+  List<int> credits = [];
+  List<double> gp = [];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -309,96 +311,100 @@ class _GPACalcState extends State<GPACalc> {
                 itemBuilder: (context, index) {
                   return Align(
                     alignment: Alignment.centerLeft,
-                    child: Row(
+                    child: Column(
                       children: [
-                        SizedBox(
-                          width: 118,
-                          height: 50,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              label: Text("course name: "),
-                              fillColor: const Color.fromARGB(255, 55, 55, 55),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.blueAccent,
-                                  width: 2,
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 118,
+                              height: 50,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  label: Text("course name: "),
+                                  fillColor: const Color.fromARGB(255, 55, 55, 55),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 16,
+                                  ),
                                 ),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                            ),
-                            onChanged: (x) {
-                              setState(() {
-
-
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: 118,
-                          height: 50,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              label: Text("course name: "),
-                              fillColor: const Color.fromARGB(255, 55, 55, 55),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.blueAccent,
-                                  width: 2,
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                            ),
-                            onChanged: (x) {
-                              setState(() {
-
-
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: 118,
-                          height: 50,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              label: Text("course name: "),
-                              fillColor: const Color.fromARGB(255, 55, 55, 55),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.blueAccent,
-                                  width: 2,
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                            ),
-                            onChanged: (x) {
-                              setState(() {
-
-
-                              });
-                            },
-                          ),
-                        ),
+                                onChanged: (x) {
+                                  setState(() {
                         
+                        
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 118,
+                              height: 50,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  label: Text("Credit hours: "),
+                                  fillColor: const Color.fromARGB(255, 55, 55, 55),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 16,
+                                  ),
+                                ),
+                                onChanged: (x) {
+                                  setState(() {
+                                    ch = ch + int.parse(x);
+                                    credits.add(int.parse(x));
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 118,
+                              height: 50,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  label: Text("GPA: "),
+                                  fillColor: const Color.fromARGB(255, 55, 55, 55),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 16,
+                                  ),
+                                ),
+                                onChanged: (x) {
+                                  setState(() {
+                                    gp.add(((credits[index])/ch) + double.parse(x));
+                                  });
+                                },
+                              ),
+                            ),
+                            
+                          ],
+                        ),
+                        Text(totalGPA(gp).toString(), style: TextStyle(color: Colors.white),)
                       ],
                     ),
                   );
@@ -407,6 +413,13 @@ class _GPACalcState extends State<GPACalc> {
       ),
     );
   }
+}
+double totalGPA(List<double> n){
+  double total = 0;
+  for(var x in n){
+    total += x;
+  }
+  return total;
 }
 
 class CGPACalc extends StatefulWidget {
