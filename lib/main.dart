@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 double? totalMarksSSC;
 double? marksSSC;
 double? totalMarksInter;
@@ -16,6 +17,30 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Merit Calc"),
+            BottomNavigationBarItem(icon: Icon(Icons.school), label: "GPA Calc"),
+            BottomNavigationBarItem(icon: Icon(Icons.auto_graph_rounded), label: "CGPA Calc"),
+            
+          ],
+        ),
+        body: MeritCalc(),
+      )
+    );
+  }
+}
+
+
+class MeritCalc extends StatefulWidget {
+  @override
+  State<MeritCalc> createState() => _MeritCalcState();
+}
+
+class _MeritCalcState extends State<MeritCalc> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
