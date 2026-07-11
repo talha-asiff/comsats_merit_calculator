@@ -17,6 +17,17 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  final _pages = [
+    MeritCalc(),
+    GPACalc(),
+    CGPACalc(),
+  ];
+  int _index = 0;
+  void _nextPage(int i){
+    setState(() {
+      _index = i;
+    });
+  }
   Widget build(BuildContext context){
     return MaterialApp(
       home: Scaffold(
@@ -25,10 +36,10 @@ class _MainAppState extends State<MainApp> {
             BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Merit Calc"),
             BottomNavigationBarItem(icon: Icon(Icons.school), label: "GPA Calc"),
             BottomNavigationBarItem(icon: Icon(Icons.auto_graph_rounded), label: "CGPA Calc"),
-            
           ],
+          onTap: _nextPage,
         ),
-        body: MeritCalc(),
+        body: _pages[_index],
       )
     );
   }
@@ -198,9 +209,6 @@ class _MeritCalcState extends State<MeritCalc> {
 
             Text("${aggregate ?? 0.0}", style: TextStyle(fontSize: 40)),
             Text("${predict(aggregate ?? 0)}"),
-            SizedBox(height: 120,),
-            Image.asset("img/image.jpg"),
-            Text("Made by Talha Asif")
           ],
         ),
       ),
@@ -223,3 +231,53 @@ String predict(double x) {
     return "Sorry admission not possible";
   }
 }
+
+class GPACalc extends StatefulWidget {
+  const GPACalc({super.key});
+
+  @override
+  State<GPACalc> createState() => _GPACalcState();
+}
+
+class _GPACalcState extends State<GPACalc> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home:Scaffold(
+        
+        appBar: AppBar(title: Row(
+          children: [
+            Image.asset('img/COMSATS-University-logo.png', width: 50, height: 50,),
+            Text("   COMSATS GPA Calculator")
+          ],
+        )),
+      )
+    );
+  }
+}
+
+
+
+class CGPACalc extends StatefulWidget {
+  const CGPACalc({super.key});
+
+  @override
+  State<CGPACalc> createState() => _CGPACalcState();
+}
+class _CGPACalcState extends State<CGPACalc>{
+  Widget build(BuildContext context){
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: Scaffold(
+        appBar: AppBar(title: Row(
+          children: [
+            Image.asset('img/COMSATS-University-logo.png', width: 50, height: 50,),
+            Text("   COMSATS CGPA Calculator")
+          ],
+        )),
+      )
+    );
+  }
+}
+
