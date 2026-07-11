@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 double? totalMarksSSC;
 double? marksSSC;
 double? totalMarksInter;
@@ -17,34 +16,39 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final _pages = [
-    MeritCalc(),
-    GPACalc(),
-    CGPACalc(),
-  ];
+  final _pages = [MeritCalc(), GPACalc(), CGPACalc()];
   int _index = 0;
-  void _nextPage(int i){
+  void _nextPage(int i) {
     setState(() {
       _index = i;
     });
   }
-  Widget build(BuildContext context){
+
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Merit Calc"),
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: "GPA Calc"),
-            BottomNavigationBarItem(icon: Icon(Icons.auto_graph_rounded), label: "CGPA Calc"),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calculate),
+              label: "Merit Calc",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: "GPA Calc",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.auto_graph_rounded),
+              label: "CGPA Calc",
+            ),
           ],
           onTap: _nextPage,
         ),
         body: _pages[_index],
-      )
+      ),
     );
   }
 }
-
 
 class MeritCalc extends StatefulWidget {
   @override
@@ -57,12 +61,18 @@ class _MeritCalcState extends State<MeritCalc> {
       theme: ThemeData.dark(),
       title: "COMSATS Merit Calculator",
       home: Scaffold(
-        appBar: AppBar(title: Row(
-          children: [
-            Image.asset('img/COMSATS-University-logo.png', width: 50, height: 50,),
-            Text("   COMSATS Merit Calculator")
-          ],
-        )),
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(
+                'img/COMSATS-University-logo.png',
+                width: 50,
+                height: 50,
+              ),
+              Text("   COMSATS Merit Calculator"),
+            ],
+          ),
+        ),
         body: Column(
           children: [
             SizedBox(height: 20),
@@ -70,8 +80,7 @@ class _MeritCalcState extends State<MeritCalc> {
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 label: Text("Total SSC Marks"),
-                fillColor:
-                    Colors.grey[850], 
+                fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -99,8 +108,7 @@ class _MeritCalcState extends State<MeritCalc> {
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 label: Text("Obtained SSC Marks"),
-                fillColor:
-                    Colors.grey[850], 
+                fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -125,8 +133,7 @@ class _MeritCalcState extends State<MeritCalc> {
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 label: Text("Total HSSC Marks"),
-                fillColor:
-                    Colors.grey[850], 
+                fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -154,8 +161,7 @@ class _MeritCalcState extends State<MeritCalc> {
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 label: Text("Obtained HSSC Marks"),
-                fillColor:
-                    Colors.grey[850], 
+                fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -180,8 +186,7 @@ class _MeritCalcState extends State<MeritCalc> {
               keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 label: Text("NTS Marks out of 100"),
-                fillColor:
-                    Colors.grey[850], 
+                fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -240,24 +245,169 @@ class GPACalc extends StatefulWidget {
 }
 
 class _GPACalcState extends State<GPACalc> {
+  int courses = 1;
+  bool nocourse = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home:Scaffold(
-        
-        appBar: AppBar(title: Row(
-          children: [
-            Image.asset('img/COMSATS-University-logo.png', width: 50, height: 50,),
-            Text("   COMSATS GPA Calculator")
-          ],
-        )),
-      )
+      home: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(
+                'img/COMSATS-University-logo.png',
+                width: 50,
+                height: 50,
+              ),
+              Text("   COMSATS GPA Calculator"),
+            ],
+          ),
+        ),
+        body: nocourse
+            ? Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      label: Text("Enter number of courses : "),
+                      fillColor: const Color.fromARGB(255, 55, 55, 55),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                          width: 2,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 16,
+                      ),
+                    ),
+                    onChanged: (x) {
+                      setState(() {
+                        courses = int.tryParse(x) ?? 1;
+                      });
+                    },
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          nocourse = false;
+                        });
+                      },
+                      child: Text("Next"),
+                    ),
+                  ),
+                ],
+              )
+            : ListView.builder(
+                itemCount: courses,
+                itemBuilder: (context, index) {
+                  return Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 118,
+                          height: 50,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              label: Text("course name: "),
+                              fillColor: const Color.fromARGB(255, 55, 55, 55),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                  width: 2,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 16,
+                              ),
+                            ),
+                            onChanged: (x) {
+                              setState(() {
+
+
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 118,
+                          height: 50,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              label: Text("course name: "),
+                              fillColor: const Color.fromARGB(255, 55, 55, 55),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                  width: 2,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 16,
+                              ),
+                            ),
+                            onChanged: (x) {
+                              setState(() {
+
+
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 118,
+                          height: 50,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              label: Text("course name: "),
+                              fillColor: const Color.fromARGB(255, 55, 55, 55),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                  width: 2,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 16,
+                              ),
+                            ),
+                            onChanged: (x) {
+                              setState(() {
+
+
+                              });
+                            },
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  );
+                },
+              ),
+      ),
     );
   }
 }
-
-
 
 class CGPACalc extends StatefulWidget {
   const CGPACalc({super.key});
@@ -265,19 +415,25 @@ class CGPACalc extends StatefulWidget {
   @override
   State<CGPACalc> createState() => _CGPACalcState();
 }
-class _CGPACalcState extends State<CGPACalc>{
-  Widget build(BuildContext context){
+
+class _CGPACalcState extends State<CGPACalc> {
+  Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
       home: Scaffold(
-        appBar: AppBar(title: Row(
-          children: [
-            Image.asset('img/COMSATS-University-logo.png', width: 50, height: 50,),
-            Text("   COMSATS CGPA Calculator")
-          ],
-        )),
-      )
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(
+                'img/COMSATS-University-logo.png',
+                width: 50,
+                height: 50,
+              ),
+              Text("   COMSATS CGPA Calculator"),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
