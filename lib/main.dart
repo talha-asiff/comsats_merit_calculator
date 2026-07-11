@@ -396,7 +396,11 @@ class _GPACalcState extends State<GPACalc> {
                                 ),
                                 onChanged: (x) {
                                   setState(() {
-                                    gp.add(((credits[index])/ch) + double.parse(x));
+                                    gp.add(((credits[index-2])/ch) + double.parse(x));
+                                    for(var x in credits){
+                                      print("${index-2} ->  $x");
+                                    }
+                                    print("_________________________________________");
                                   });
                                 },
                               ),
@@ -419,6 +423,7 @@ double totalGPA(List<double> n){
   for(var x in n){
     total += x;
   }
+  
   return total;
 }
 
