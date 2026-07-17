@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(MainApp());
 }
@@ -11,13 +10,8 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: MeritCalc(),
-      ),
-    );
+    return MaterialApp(home: Scaffold(body: MeritCalc()));
   }
 }
 
@@ -55,6 +49,7 @@ class _MeritCalcState extends State<MeritCalc> {
           child: Column(
             children: [
               SizedBox(height: 20),
+
               // TextField(
               //   keyboardType: TextInputType.numberWithOptions(),
               //   decoration: InputDecoration(
@@ -190,21 +185,25 @@ class _MeritCalcState extends State<MeritCalc> {
               //     });
               //   },
               // ),
-
               Form(
-                key : inpForm,
+                key: inpForm,
                 child: Container(
-                  width: 350 * (MediaQuery.of(context).size.width >= MediaQuery.of(context).size.height ? 2 : 1),
+                  width:
+                      350 *
+                      (MediaQuery.of(context).size.width >=
+                              MediaQuery.of(context).size.height
+                          ? 2
+                          : 1),
                   height: 500,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbtfmQr-KTl02JJQxiepDT0OevtrzTZI33HcW3M2Hh0A&s=10",),
-                      fit: BoxFit.cover
+                      image: NetworkImage(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbtfmQr-KTl02JJQxiepDT0OevtrzTZI33HcW3M2Hh0A&s=10",
                       ),
+                      fit: BoxFit.cover,
+                    ),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Colors.white
-                    )
+                    border: Border.all(color: Colors.white),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(20),
@@ -215,79 +214,282 @@ class _MeritCalcState extends State<MeritCalc> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                          width: 150 * (MediaQuery.of(context).size.width >= MediaQuery.of(context).size.height ? 2 : 1),
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              label: Text("Total SSC Marks : ", style: TextStyle(color: Colors.white, fontSize: 10)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                  color: const Color.fromARGB(255, 33, 51, 243),
-                                  width: 1
-                                )
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                  color: Colors.blue,
-                                  width: 1
-                                )
+                              width:
+                                  150 *
+                                  (MediaQuery.of(context).size.width >=
+                                          MediaQuery.of(context).size.height
+                                      ? 2
+                                      : 1),
+                              height: 50,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Total SSC Marks : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        33,
+                                        51,
+                                        243,
+                                      ),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      ((double.tryParse(value) ?? 0) <
+                                          (marksSSC ?? 0))) {
+                                    return "Obtained marks must be greater than or equal to Total marks";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (newValue) {
+                                  totalMarksSSC = double.tryParse(newValue!);
+                                },
                               ),
                             ),
-                            validator: (value) {
-                              if(value == null || ((double.tryParse(value) ?? 0) < (marksSSC ?? 0) )){
-                                return "Obtained marks must be greater than or equal to Total marks";
-                              }
-                              return null;
-                            },
-                            onSaved: (newValue) {
-                              totalMarksSSC = double.tryParse(newValue!);
-                            },
-                          ),
-                        ),
 
-                        SizedBox(
-                          width: 150 * (MediaQuery.of(context).size.width >= MediaQuery.of(context).size.height ? 2 : 1),
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              label: Text("SSC Marks : ", style: TextStyle(color: Colors.white, fontSize: 10)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                  color: const Color.fromARGB(255, 33, 51, 243),
-                                  width: 1
-                                )
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                  color: Colors.blue,
-                                  width: 1
-                                )
+                            SizedBox(
+                              width:
+                                  150 *
+                                  (MediaQuery.of(context).size.width >=
+                                          MediaQuery.of(context).size.height
+                                      ? 2
+                                      : 1),
+                              height: 50,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "SSC Marks : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        33,
+                                        51,
+                                        243,
+                                      ),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      ((double.tryParse(value) ?? 0) >
+                                          (totalMarksSSC ?? 0))) {
+                                    return "Obtained marks must be less than or equal to Total marks";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (newValue) {
+                                  marksSSC = double.tryParse(newValue!);
+                                },
                               ),
                             ),
-                            validator: (value) {
-                              if(value == null || ((double.tryParse(value) ?? 0) > (totalMarksSSC ?? 0) )){
-                                return "Obtained marks must be less than or equal to Total marks";
-                              }
-                              return null;
-                            },
-                            onSaved: (newValue) {
-                              marksSSC = double.tryParse(newValue!);
-                            },
-                          ),
-                        ),
                           ],
-                        )
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width:
+                                  150 *
+                                  (MediaQuery.of(context).size.width >=
+                                          MediaQuery.of(context).size.height
+                                      ? 2
+                                      : 1),
+                              height: 50,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Total HSSC Marks : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        33,
+                                        51,
+                                        243,
+                                      ),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      ((double.tryParse(value) ?? 0) <
+                                          (marksSSC ?? 0))) {
+                                    return "Obtained marks must be greater than or equal to Total marks";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (newValue) {
+                                  totalMarksInter = double.tryParse(newValue!);
+                                },
+                              ),
+                            ),
+
+                            SizedBox(
+                              width:
+                                  150 *
+                                  (MediaQuery.of(context).size.width >=
+                                          MediaQuery.of(context).size.height
+                                      ? 2
+                                      : 1),
+                              height: 50,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "HSSC Marks : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        33,
+                                        51,
+                                        243,
+                                      ),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      ((double.tryParse(value) ?? 0) >
+                                          (totalMarksSSC ?? 0))) {
+                                    return "Obtained marks must be less than or equal to Total marks";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (newValue) {
+                                  marksInter = double.tryParse(newValue!);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width:
+                                  300 *
+                                  (MediaQuery.of(context).size.width >=
+                                          MediaQuery.of(context).size.height
+                                      ? 2
+                                      : 1),
+                              height: 50,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "NTS NAT / CUI NAT Marks : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        33,
+                                        51,
+                                        243,
+                                      ),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      ((double.tryParse(value) ?? 0) < 100)) {
+                                    return "Obtained marks must be greater than or equal to Total marks (100)";
+                                  } else if((double.tryParse(value) ?? 0 ) > 100){
+                                    return "Obtained Marks can not exceed Total Marks";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (newValue) {
+                                  nts = double.tryParse(newValue!);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        
                       ],
                     ),
                   ),
                 ),
               ),
-              
-          
+
               Text("${aggregate ?? 0.0}", style: TextStyle(fontSize: 40)),
               Text("${predict(aggregate ?? 0)}"),
             ],
