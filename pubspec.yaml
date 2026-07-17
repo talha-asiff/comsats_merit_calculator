@@ -31,11 +31,11 @@ flutter_launcher_icons:
 
 flutter_native_splash:
   # The path to your splash image (must be transparent PNG)
-  image: img/splash.png
+  image: img/COMSATS-University-logo.png
   # Background color of the splash screen (hex format)
-  color: "#ffffff"
+  #color: "#ffffff"
   # Set to true to fill the screen (Android 12+ compatibility)
   fullscreen: true
 android_12:
-    image: assets/splash.png 
-    color: "#ffffff"
+    image: img/COMSATS-University-logo.png 
+    #color: "#ffffff"
