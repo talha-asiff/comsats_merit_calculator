@@ -15,7 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  flutter_native_splash: ^2.4.0 # Check pub.dev for the latest version
+  flutter_native_splash: ^2.4.7 # Check pub.dev for the latest version
 
 flutter:
   uses-material-design: true
@@ -33,9 +33,9 @@ flutter_native_splash:
   # The path to your splash image (must be transparent PNG)
   image: img/COMSATS-University-logo.png
   # Background color of the splash screen (hex format)
-  #color: "#ffffff"
+  color: "#ffffff"
   # Set to true to fill the screen (Android 12+ compatibility)
   fullscreen: true
 android_12:
     image: img/COMSATS-University-logo.png 
-    #color: "#ffffff"
+    color: "#ffffff"
