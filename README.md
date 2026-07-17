@@ -1,5 +1,5 @@
 # COMSATS University Admission Aggregate Calculator
-![Project Image](https://i.ibb.co/r2rGRcdC/splash.png)
+![Project Image](https://i.ibb.co/LXKsgW7V/image.png)
 ---
 COMSATS University admission merit aggregate calculator app made with flutter
 
