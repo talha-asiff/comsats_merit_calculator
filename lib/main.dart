@@ -85,7 +85,7 @@ class _MeritCalcState extends State<MeritCalc> {
                             )
                           ),
                           alignment: Alignment.center,
-                          child: Text("${aggregate ?? 0.0}", style: TextStyle(fontSize: 30)),
+                          child: Text("${(aggregate ?? 0.0).toStringAsFixed(2)}", style: TextStyle(fontSize: 30)),
                         ),
                         SizedBox(height: 10,),
                         Text("${predict(aggregate ?? 0)}", style: TextStyle(fontSize: 10),),
