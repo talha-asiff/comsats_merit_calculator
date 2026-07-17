@@ -209,6 +209,23 @@ class _MeritCalcState extends State<MeritCalc> {
                     padding: EdgeInsets.all(20),
                     child: Column(
                       children: [
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(360),
+                            border: Border.all(
+                              color: aggregate == null ? Colors.blue : aggregate! >=80 ? Colors.green : aggregate! >=70 ? const Color.fromARGB(255, 215, 212, 3) : Colors.red,
+                              width: 10
+                            )
+                          ),
+                          alignment: Alignment.center,
+                          child: Text("${aggregate ?? 0.0}", style: TextStyle(fontSize: 30)),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("${predict(aggregate ?? 0)}", style: TextStyle(fontSize: 10),),
+                        SizedBox(height: 20,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -251,10 +268,9 @@ class _MeritCalcState extends State<MeritCalc> {
                                   ),
                                 ),
                                 validator: (value) {
-                                  if (value == null ||
-                                      ((double.tryParse(value) ?? 0) <
-                                          (marksSSC ?? 0))) {
-                                    return "Obtained marks must be greater than or equal to Total marks";
+                                 if (value == null ||
+                                      ((double.tryParse(value) ?? 0) < 0)) {
+                                    return "This field cannot be null or filled with a negative value";
                                   }
                                   return null;
                                 },
@@ -303,9 +319,8 @@ class _MeritCalcState extends State<MeritCalc> {
                                 ),
                                 validator: (value) {
                                   if (value == null ||
-                                      ((double.tryParse(value) ?? 0) >
-                                          (totalMarksSSC ?? 0))) {
-                                    return "Obtained marks must be less than or equal to Total marks";
+                                      ((double.tryParse(value) ?? 0) < 0)) {
+                                    return "This field cannot be null or filled with a negative value";
                                   }
                                   return null;
                                 },
@@ -360,9 +375,8 @@ class _MeritCalcState extends State<MeritCalc> {
                                 ),
                                 validator: (value) {
                                   if (value == null ||
-                                      ((double.tryParse(value) ?? 0) <
-                                          (marksSSC ?? 0))) {
-                                    return "Obtained marks must be greater than or equal to Total marks";
+                                      ((double.tryParse(value) ?? 0) < 0)) {
+                                    return "This field cannot be null or filled with a negative value";
                                   }
                                   return null;
                                 },
@@ -411,9 +425,8 @@ class _MeritCalcState extends State<MeritCalc> {
                                 ),
                                 validator: (value) {
                                   if (value == null ||
-                                      ((double.tryParse(value) ?? 0) >
-                                          (totalMarksSSC ?? 0))) {
-                                    return "Obtained marks must be less than or equal to Total marks";
+                                      ((double.tryParse(value) ?? 0) < 0)) {
+                                    return "This field cannot be null or filled with a negative value";
                                   }
                                   return null;
                                 },
@@ -468,8 +481,8 @@ class _MeritCalcState extends State<MeritCalc> {
                                 ),
                                 validator: (value) {
                                   if (value == null ||
-                                      ((double.tryParse(value) ?? 0) < 100)) {
-                                    return "Obtained marks must be greater than or equal to Total marks (100)";
+                                      ((double.tryParse(value) ?? 0) > 100)) {
+                                    return "Obtained marks must be smaller than or equal to Total marks (100)";
                                   } else if((double.tryParse(value) ?? 0 ) > 100){
                                     return "Obtained Marks can not exceed Total Marks";
                                   }
@@ -483,15 +496,31 @@ class _MeritCalcState extends State<MeritCalc> {
                           ],
                         ),
                         SizedBox(height: 10,),
-                        
+                        InkWell(
+                          child: Container(
+                            width: 150,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Colors.blue, const Color.fromARGB(255, 24, 20, 235), const Color.fromARGB(255, 2, 0, 140)]),
+                              borderRadius: BorderRadius.circular(360)
+                            ),
+                            alignment: Alignment.center,
+                            child: Text("CALCULATE", style: TextStyle(color: Colors.white),),
+                          ),
+                          onTap: () {
+                            if(inpForm.currentState!.validate()){
+                              inpForm.currentState!.save();
+                            }
+                            setState(() {
+                              aggregate = (((marksSSC! / totalMarksSSC!) * 100) * 0.1 + ((marksInter! / totalMarksInter!) * 100) * 0.4 +((nts! / 100) * 100) * 0.5);
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
-
-              Text("${aggregate ?? 0.0}", style: TextStyle(fontSize: 40)),
-              Text("${predict(aggregate ?? 0)}"),
             ],
           ),
         ),
